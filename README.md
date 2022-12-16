@@ -58,13 +58,13 @@ FLAIR sequence (CUBE/SPACE) - "flair"
 
 To use either the 3D network call the ```predict.py``` script as follows:
 ```
-predict-met -i where/files/are/stored -i where/files/are/saved -c checkpoints/ --device cuda:0
+met-seg -i where/files/are/stored -i where/files/are/saved -c checkpoints/ --device cuda:0
 ```
 where ```-i``` is the location of the nifti files, ```-o``` where the files are stored (optional, by default they are stored in the same directory as the input), ```-c``` where the weights are stored, and ```--device``` which device to use for the prediction (cuda or cpu). 2D support has not been added as the 3D variant seemed to have the most promise.
 
 ### Good to know
 
-It is recommended to have a GPU, but not recommended. In total, the inference takes about ... on a Nvidia RTX 3060 laptop version, and ... on an AMD Ryzen 9 5900HS. The model takes about 2.5GB of GPU memory.
+It is recommended to have a GPU, but not recommended. In total, the inference takes about 40 seconds on a Nvidia RTX 3060 laptop version. The model takes about 5.5GB of GPU memory.
 
 ### Installation
 
@@ -73,7 +73,7 @@ The dependencies can be downloaded by running:
 cd met-seg
 conda env create -f environment.yml
 ```
-After the environment/packages have been installed. The program ```predict-met``` can be installed so you can run the prediction without being in this repository. Note, this only works on Linux. Run the following command in the *met-seg* repo:
+After the environment/packages have been installed. The program ```met-seg``` can be installed so you can run the prediction without being in this repository. Note, this only works on Linux. Run the following command in the *met-seg* repo:
 ```
 pip install -e .
 ```

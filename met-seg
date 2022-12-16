@@ -23,11 +23,9 @@ import nibabel as nib
 
 from pathlib import Path
 
-import ants
 import nibabel as nib
 from tqdm import tqdm
 
-import matplotlib.pyplot as plt
 import numpy as np
 
 from t_seg.dataset.containers import DatasetContainer
@@ -147,7 +145,15 @@ lllollllcccccc,..,,;coxO0KKKKKXXXXXXXXXXNNWWNXK0Okkxl,.........',,,,;;:;;,'....
         multi_scale_output=True,
         deep_supervision=True,
         )
+    model.deep_supervision = False
 
+    inferer = monai.inferers.SlidingWindowInferer(
+    roi_size=(128, 128, 128),
+    sw_batch_size=1,
+    overlap=0.5,
+    mode="gaussian",
+    sigma_scale=0.125,
+    )
 
     model.load_state_dict(torch.load(checkpoint, map_location='cpu')['state_dict'])
 
@@ -233,7 +239,7 @@ lllollllcccccc,..,,;coxO0KKKKKXXXXXXXXXXNNWWNXK0Okkxl,.........',,,,;;:;;,'....
             factor = p/(1 - p)
             inp = inp*factor
             
-            out = model(inp.unsqueeze(0))[0]
+            out = inferer(inp.unsqueeze(0), model)[0]
 
             mini_pred = torch.nn.functional.logsigmoid(out.squeeze(0).squeeze(0)).exp().to('cpu')
 

@@ -9,6 +9,8 @@ dependencies:
   - numpy=1.23.1
   - h5py=3.7.0
   - scipy==1.9.1
-  - nibabel==2.3.0
+  - nibabel==4.0.2
   - monai==1.0.1
   - wandb==0.13.5
+  - tqdm==4.64.1
+  - scikit-image==0.19.3
