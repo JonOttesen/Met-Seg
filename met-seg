@@ -1,0 +1,262 @@
+#!/usr/bin/env python
+import os
+import json
+import glob
+from pathlib import Path
+
+import numpy as np
+from tqdm import tqdm
+
+import monai
+import torch
+import torch.nn as nn
+
+from t_seg.dataset.containers import DatasetContainer
+
+from m_seg.models.HRNet3D.hrnet import HighResolutionNet
+from m_seg.models.HRNet3D.config import hrnet_w48
+
+
+from skimage import measure
+
+import nibabel as nib
+
+from pathlib import Path
+
+import ants
+import nibabel as nib
+from tqdm import tqdm
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from t_seg.dataset.containers import DatasetContainer
+
+
+if __name__ == "__main__":
+    print("\n########################")
+    print("Metastases Segmentation")
+    print("""
+.......'ol'''.';xx:,,,lo:o0x:;codkddOOkOxl:cxXXxlo0Oc::ckKOxo::ldxk0KKXXXK0d:oO
+........ld:,,'';dkl,,;cocoOkololoxdd0OkkdlookXKdcoxo:codOK0xc'.'',;:cdxkkxxoclx
+........co'....'ox:...;:':Okc;c:cxooOkdd:...lK0c.',,';llx0c'........,clooooooll
+........;occclloxkdollol;ck0OkxxxkkOK0OOkddxkK0o,.,;,;dxOXk,.......,clldddddddd
+...........';ldxxkxddl:,,ckkkkxxkkkO00OOOOOkkOd,.';::okk0Kl.......';ooodxxxxddd
+........     ..,cxkxxxxxxkOkoc;:::ckkoloolooo:..,,,;:oxkk:........,cdoodxxxxxxx
+........       ..':::cccoOOxo:;;;,:xl'....... .'''',cx0k:........';lddodxxxxxxx
+.........   ..........'':xd:;;;;,',,...'''. ...''',,:dOl.........,codddxxxxxxxx
+.......''. .   .........','............',,....''....'cc,........';lddddxxxxxxxx
+.......,l'     ............ ......'...',;;'..........''..  .....,:odxddxxxxxxxx
+'''....,o;              .... .....,'..'',;,''...................,coddddxxxxxxxk
+''''''.,ol.                .   ..........','...''..'...'........;ldddddxxxxxxxk
+,,,,''';dx:.           ..        ....... .........''''''''......:odxxddxxxxxxxk
+;,,,,,';dkc.                                ..''''.'','',;,.....:odddddxxxxxxxx
+;;;;,,,,;;.                               .cc;cxxc.....';::,....:odddodxxxxxxxx
+;,,'''''...            .          ........dKo.'OKc.......,;;,...;oodooxxxxxxxxx
+'''........          .;. ...       ..'''';xKKdoxl..........';;'.,looldxxxxxxxxx
+''.........          ;l' .,,.      ..';;,,;:cc:...  ........',;;;colldxxxxxxxxx
+'''''''''..          .,;,''.        ........      ...........';;;cllldddddddddd
+''''''',;,.            ...             ....     .............',;::clooddddddddd
+,,,,,;:ll,                           ..''.........''''.......'',:cccoooddddoodo
+clllloxd:.                           ...........,:cc:;,,''''',;;:c:clloooooollc
+kO000Okl.                          ....'.......,:llc:;,,,,;;;;::::;:::cccccc::;
+kO000Okl.                .        .cl,,,......'coooc;,,',,,,;;:c:;;;;,;;;;;,'''
+xkkkkkd;.            ......      .'lddllccclodxkkoccc::;;:;,,,,;;;::;'..',,,,'.
+kxocloc..         ...............,lxOO0KXNNWWWKdll:;',;:clcc:;;,,,,,;,,''',:lod
+dol:ll;'...    ...... .....,cooodxk0KXXXNWWWNXOl,'.,;;;::cllcc:;,''''...',,,,:c
+l:;::;;;'.........  ......,cdkO00KKXXXXNNWNNXKkc,,,;codddol::::;;;;,,'....'''''
+;'.,,;;;,,;;,.... .....',:ok0KXXXXXXXXXXXNNNXXKOxxO0000Okoc:,,;;;;::;,'....''''
+'...'''',:c:'.....,'.'lxO0KXXXXXKKXKXXXXXXXXXXNXXXNNWWXOxo:;;,'',;::;;;'....'''
+,,,''..';lxd:'..':;,:oOXXXXXXXXXKKXXKXXXXXXXXXNNNNNWWWNKx:,'.','',;:::;;,'..'''
+:::c:;;::loc;'.';;:cdkOKXXXKKKXKKXXXXXXXXXXXXXNNNKOOKKK0kl,......',,;::;,'...',
+ccclllolllccc:;,.';cokO00KKKKKKXXXKKXXXNNNNXXXXNNKxcccclc;'.......',,;;;,'....'
+llloooolllcllc;...;codxO0KKKKKKXXXXKXXXXNNNNNXXXXXOo:..........'''',,;;;;,.....
+lllollllcccccc,..,,;coxO0KKKKKXXXXXXXXXXNNWWNXK0Okkxl,.........',,,,;;:;;,'....
+::::::c::c::c;'.''';coxOK00KKKXXXXKKXXXNNWWWXKOkdlc::,.......'''';,,;;:::;;'...
+''',,;:;;::cc,'.'.';coxO00000KXXXK0KXXNNNNWNX0Oxo:'..........''''',,;;:cc:;,...
+.......''',:;'....,:coxkOOOkOKK00KKXXXXXXXNXKOkxl'...........''',',;;;::c::;'..
+...........'......;cccodxxdxOOxxO0KXXXKOO0K0OOOd;........''..'',,,,;;::::::;,..
+.................',;;:llc:codooxO0KXXKklldOkkkxo;.........''.'',,,,,;::::::;;,'
+ ........... .....'',;,'',;:cloxO0KKKkc,,cxxdooo:..........''',;;;;;;:::c::;;;;
+   .....     ......'.......,:ldxkO00Oo;'';odll:::'.........,,',;::;:;;:cc:;;,,,
+      .      ..............',cxkxkkko:,,,,:ccc;,;'.........;;,',;;;;:::clc:,,,,
+""")
+    print("########################\n")
+
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input', help='input. path to a folder with nifiti files or a folder wit folders of nifti files', required=True, type=str)
+    parser.add_argument('-c', '--checkpoint', default="checkpoints/3d_model.pth", help='checkpoint. the path where the checkpoint is located (default: checkpoints/3d_model.pth)', required=False, type=str)
+    parser.add_argument('-o', '--output', help='output. Can be either a filename or a folder. If it does not exist, the folder'
+                                     ' will be created', required=False, type=str)
+    parser.add_argument('-device', default='0', type=str, help='used to set on which device the prediction will run. '
+                                                               'Must be either int or str. Use int for GPU id or '
+                                                               '\'cpu\' to run on CPU.', required=False)
+    args = parser.parse_args()
+
+    input_file_or_dir = args.input
+    output_file_or_dir = args.output
+    device = args.device
+    checkpoint = args.checkpoint
+
+    if output_file_or_dir is None:
+        output_file_or_dir = os.path.join(os.path.dirname(input_file_or_dir),
+                                          str(Path(input_file_or_dir).stem) + "_metseg")
+
+
+    assert os.path.abspath(input_file_or_dir) != os.path.abspath(output_file_or_dir), "output must be different from input"
+    
+    input_file_or_dir = Path(input_file_or_dir)
+    output_file_or_dir = Path(output_file_or_dir)
+    output_file_or_dir.mkdir(exist_ok=True, parents=True)
+
+    if device == 'cpu':
+        pass
+    else:
+        device = int(device)
+    
+    assert input_file_or_dir.is_dir(), "input must be a dir"
+
+    print("Checking for files")
+
+    # Yes, the project name is "ELITE"... not a big fan
+    container = DatasetContainer().ELITE(
+        path=input_file_or_dir,
+        datasetname="ELITE",
+        dataset_type="all",
+        source="Stanford",
+        dataset_description="ELITE data from Stanford",
+        sequence_statistics=False,
+        )
+
+    assert len(container) > 0, "could not find any files in the folder, are they named correctly?"
+    container.order_instances()
+
+    for entry in container:
+        if len(entry) < 4:
+            print("All four sequences are not present for all studies, this is no problem, just letting you know.")
+            break
+
+    model = HighResolutionNet(
+        config=hrnet_w48,
+        inp_classes=4,
+        num_classes=1,
+        ratio=None,
+        activation=nn.SiLU(inplace=True),
+        bias=True,
+        multi_scale_output=True,
+        deep_supervision=True,
+        )
+
+
+    model.load_state_dict(torch.load(checkpoint, map_location='cpu')['state_dict'])
+
+    model = model.to(device)
+    model.eval()
+
+    x_y_thickness = 0.9375
+    slice_thickness = 1
+
+    norm = monai.transforms.NormalizeIntensity(nonzero=True, channel_wise=True)
+    crop = monai.transforms.CropForeground(margin=2, k_divisible=16, return_coords=True, mode='constant')
+
+    threshold = 0.99
+    mets = dict()
+
+    with torch.no_grad():
+        for i, entry in tqdm(enumerate(container)):
+
+            name = Path(entry[0].image_path).parts[-2]
+            
+            pred = np.zeros(entry[0].shape)
+            img = entry[0].open()
+            shape = img.shape
+            x = img.header["pixdim"][1]
+            y = img.header["pixdim"][2]
+            z = img.header["pixdim"][3]
+            zooms = (x, y, z)
+    
+            inp = torch.zeros((4,) + (shape))
+
+            mask = np.ones(shape)
+            for i, instance in enumerate(entry):
+                if "_mask" in instance.image_path:
+                    mask = instance.open().get_fdata()
+            counter = 0
+            for i, instance in enumerate(entry):
+                if "_mask" in instance.image_path:
+                    continue
+                if i == 0:
+                    affine = instance.open().affine
+
+                img = instance.open().get_fdata()
+                img[np.isnan(img)] = 0
+                if mask is not None:
+                    img = img*mask
+
+                # low = np.percentile(img[img != 0], 0.5)
+                # high = np.percentile(img[img != 0], 99.5)
+                # img[img != 0] = np.clip(img[img != 0], low, high)
+                img = torch.from_numpy(img)
+
+                if instance.sequence_type.lower() == "bravo":
+                    inp[0] = img
+                    counter += 1
+                elif instance.sequence_type.lower() == "t1" and instance.contrast == True:
+                    inp[1] = img
+                    counter += 1
+                elif instance.sequence_type.lower() == "t1" and instance.contrast == False:
+                    inp[2] = img
+                    counter += 1
+                elif instance.sequence_type.lower() == "flair":
+                    inp[3] = img
+                    counter += 1
+
+
+            x = round(shape[0]*x/x_y_thickness)
+            y = round(shape[1]*y/x_y_thickness)
+            z = round(shape[2]*z/slice_thickness)
+            size = (x, y, z)
+
+            inp = inp.unsqueeze(0)
+            inp = torch.nn.functional.interpolate(inp, size=size, mode='trilinear')
+            inp = torch.nn.functional.pad(inp, (10, 10, 10, 10, 10, 10))
+
+            pred = torch.zeros(inp.shape[2:])
+
+            inp = inp.to(device)
+            inp, a, b = crop(inp.squeeze(0))
+
+            inp = norm(inp)
+            # Important to scale inp correctly if one of the sequences are missing -> input level dropout
+            p = counter/4
+            factor = p/(1 - p)
+            inp = inp*factor
+            
+            out = model(inp.unsqueeze(0))[0]
+
+            mini_pred = torch.nn.functional.logsigmoid(out.squeeze(0).squeeze(0)).exp().to('cpu')
+
+            pred[a[0]: b[0], a[1]: b[1], a[2]: b[2]] = mini_pred
+    
+            pred[pred < threshold] = 0
+            pred[pred >= threshold] = 1
+
+            gt_seperate, num = measure.label(pred, background=0, connectivity=2, return_num=True)
+            mets[name] = num
+            pred = pred[10:-10, 10:-10, 10:-10]
+
+            pred = torch.nn.functional.interpolate(pred.unsqueeze(0).unsqueeze(0), size=shape, mode='nearest').squeeze(0).squeeze(0).numpy()
+    
+            file = str(output_file_or_dir / Path(name)) + ".nii.gz"
+            img = nib.Nifti1Image(pred, affine)
+            nib.save(img, file)
+
+    sorted_mets = dict()
+    sortednames=sorted(mets.keys(), key=lambda x:x.lower())
+
+    for name in sortednames:
+        sorted_mets[name] = mets[name]
+
+    with open(output_file_or_dir / Path("met_count.json"), "w") as write_file:
+        json.dump(sorted_mets, write_file, indent=4)

@@ -1,0 +1,672 @@
+{
+    "info": [
+        {
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "source": "Stanford",
+            "dataset_description": "ELITE data from Stanford"
+        }
+    ],
+    "entries": [
+        {
+            "segmentation_path": "path/to/files/train/Mets_036/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_036/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1722.6840446490114",
+                    "std": "606.9328639746782"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_036/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "877.7882670642246",
+                    "std": "351.639632922145"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_036/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "585.1626170385917",
+                    "std": "188.48821644378876"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_036/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "620.9107005539172",
+                    "std": "179.43557640746462"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_319/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_319/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1994.486841699255",
+                    "std": "818.3725825718358"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_319/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1339.7223319233642",
+                    "std": "551.6936766735497"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_319/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "633.6576147303377",
+                    "std": "214.0236694120097"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_319/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "665.7116955076946",
+                    "std": "198.59110705522767"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_044/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_044/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1967.0428544925721",
+                    "std": "779.7197718049362"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_044/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1019.6328018989483",
+                    "std": "390.5566004685992"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_044/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "455.44314716290404",
+                    "std": "142.11272852154218"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_044/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "512.0967720245469",
+                    "std": "151.62639798675244"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_066/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_066/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "2512.5063782303423",
+                    "std": "866.0422696661052"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_066/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "993.9972475764607",
+                    "std": "425.7585801179457"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_066/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "475.306427332618",
+                    "std": "128.92144458928513"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_066/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "531.8113791568034",
+                    "std": "132.51650472464948"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_072/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_072/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "919.0437407115091",
+                    "std": "268.85767893000315"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_072/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "404.8944182172869",
+                    "std": "155.36171443551973"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_072/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "193.31483272726678",
+                    "std": "69.49276394466445"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_072/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "219.46757601208327",
+                    "std": "69.00965765526345"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_090/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_090/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1499.1973190570736",
+                    "std": "588.3931656639367"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_090/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "845.8719891410005",
+                    "std": "311.5907370698553"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_090/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "525.5862517032873",
+                    "std": "140.8261224157986"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_090/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "577.3383409960744",
+                    "std": "136.03832383384452"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_297/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_297/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "716.1436362888027",
+                    "std": "262.6073134691533"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_297/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "366.59263018846974",
+                    "std": "186.33333280497453"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_297/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "254.35309573974564",
+                    "std": "99.57984157501438"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_297/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "277.2057298319506",
+                    "std": "98.7136046926331"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_013/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_013/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "770.1893030749611",
+                    "std": "309.0632307026145"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_013/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "383.5768506252084",
+                    "std": "215.02620952536273"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_013/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "272.31949360607655",
+                    "std": "110.92207978272506"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_013/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "287.10634451816213",
+                    "std": "114.02125487465494"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_037/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_037/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1643.9949573338954",
+                    "std": "777.5349296665124"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_037/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "612.1807923379204",
+                    "std": "274.4122374147272"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_037/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "501.1920566992348",
+                    "std": "179.70825452443327"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_037/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "542.3709603133522",
+                    "std": "177.80603994880263"
+                }
+            ]
+        },
+        {
+            "segmentation_path": "path/to/files/train/Mets_265/seg.h5",
+            "datasetname": "ELITE",
+            "dataset_type": "all",
+            "shape": [
+                150,
+                256,
+                256
+            ],
+            "score": {},
+            "label": null,
+            "instances": [
+                {
+                    "image_path": "path/to/files/train/Mets_265/bravo.h5",
+                    "sequence_type": "BRAVO",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "1821.6601545000992",
+                    "std": "657.5556790743306"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_265/flair.h5",
+                    "sequence_type": "FLAIR",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "884.0423486703938",
+                    "std": "306.6640622505438"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_265/t1_pre.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": false,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "498.9341111276242",
+                    "std": "149.5124437267897"
+                },
+                {
+                    "image_path": "path/to/files/train/Mets_265/t1_gd.h5",
+                    "sequence_type": "T1",
+                    "field_strength": null,
+                    "contrast": true,
+                    "shape": [
+                        150,
+                        256,
+                        256
+                    ],
+                    "mean": "544.9634820359298",
+                    "std": "144.88722307676358"
+                }
+            ]
+        }
+    ]
+}
