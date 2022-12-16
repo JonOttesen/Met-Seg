@@ -17,8 +17,8 @@ For a given study, all images must be co-registered and it is recommended that t
 The model weights can be downloaded from:
 | Type   | Link |
 |--------|------|
-| 2D     |      |
-| 3D     |      |
+| 2D     |[here](https://drive.google.com/file/d/1G9D11GNS7m5zpNMDaC5CXzMrLr4XqP_q/view?usp=sharing)   |
+| 3D     |[here](https://drive.google.com/file/d/1zL5oiwE48LVXTsDd7kiJ8KN-hx4oGAiB/view?usp=sharing)   |
 | nnUNet |      |
 
 ### General Information
